@@ -135,3 +135,19 @@ Screenshots from the exercises are stored in the `screenshots/` directory.
 - RViz2
 - URDF / Xacro
 - ROS 2 topics, services, and actions
+
+## Known Issues and Limitations
+
+During testing, some sensor topics did not publish data at their configured update rates.
+
+- **Depth Camera:** Configured at 10 Hz, but the observed publishing rate was approximately 1.28 Hz.
+- **Point Cloud:** Configured at 10 Hz, but the observed publishing rate was approximately 0.15–0.18 Hz.
+- **IMU:** Configured at 50 Hz, but the observed publishing rate was approximately 5.4 Hz.
+
+**Possible Cause:**
+
+Gazebo's real-time factor fluctuated during testing. I suspect that simulation performance and resource limitations in the WSL2 environment may have contributed to the reduced sensor publishing rates. However, this cause has not been confirmed.
+
+**Successful Testing:**
+
+The square-driving exercise was successfully completed. The robot performed four forward movements and four rotations using the custom action server and client. The launch configuration also disables the default drive controller before starting the square driver to prevent competing velocity commands.
